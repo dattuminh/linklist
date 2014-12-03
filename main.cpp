@@ -12,7 +12,26 @@ LinkNode * createLinkNode(Btree *node){
 	Btree *greg = node;
 	return root;
 }
-
+void throughBitreeOrder(Btree* node){
+//	Btree *pre = node;
+	if(node == NULL)
+		return;
+	Btree *temp;
+	Btree *p = node;
+	while(p->l!=NULL){
+		s.push(p);
+		p = p->l;
+	}
+	cout<<p->data<<endl;
+	while(!s.empty()){
+		temp = s.top();
+		s.pop();
+		cout<<temp->data<<endl;
+		throughBitreeOrder(temp->r);
+		cout<<temp->r->data<<endl;
+	}
+}
+//while(s.empty()==false)s.pop();
 Btree * createBtree(const char* p){
 	while(*p!='\0'){
 		Btree *btree_root;
@@ -43,5 +62,6 @@ int main(int argc,char *argv[]) {
 	root  = new LinkNode();
 	const char* p = "ab-c/de+*";
     	Btree *btree = createBtree(p);
+	throughBitreeOrder(btree);
 	return 0;
 }

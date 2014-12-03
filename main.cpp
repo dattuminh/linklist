@@ -6,19 +6,10 @@ using namespace std;
 
 LinkNode *root = NULL;
 stack<Btree*> s;
-LinkNode * createNode(LinkNode *root,char* p1,char* p2,char* q1,char* q2){
-	//先构造二叉树
-	/*if(mid_c[0]!=back_c[0]){
-		cout<<"input data error"<<endl;
-		return NULL;
-	}*/
-/////p1、p1是中缀表达式，q1、q2是后缀表达式
-	
-//	root.data = mid_c[0];
-/*	
-	while(a!='\0'){
-		
-	}*/
+
+LinkNode * createLinkNode(Btree *node){
+	Btree *pre = node;
+	Btree *greg = node;
 	return root;
 }
 
@@ -32,13 +23,16 @@ Btree * createBtree(const char* p){
 			}		
      		btree_root = new Btree();
 			btree_root->r = s.top();
+			s.pop();
 			btree_root->l = s.top();
+			s.pop();
 			btree_root->data = *p;
 			s.push(btree_root);
-		}
-		btree_root = new Btree();
-		btree_root->data = *p;
-		s.push(btree_root);
+		}else{
+			btree_root = new Btree();
+			btree_root->data = *p;
+			s.push(btree_root);
+		}	
 		p++;
 	}	
 	return s.top();
@@ -47,8 +41,7 @@ Btree * createBtree(const char* p){
 
 int main(int argc,char *argv[]) {
 	root  = new LinkNode();
-	const char* p = "ab-c/de+x";
-    Btree *btree = createBtree(p);
-	cout<<btree->l->data<<endl;
+	const char* p = "ab-c/de+*";
+    	Btree *btree = createBtree(p);
 	return 0;
 }
